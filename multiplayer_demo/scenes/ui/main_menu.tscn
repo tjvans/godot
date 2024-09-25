@@ -1,19 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://dct8eoetfhne"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu_controller.gd" id="1_xwvgl"]
+[ext_resource type="Script" path="res://scenes/ui/menu_controller_main.gd" id="1_bve8g"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_button", "join_button", "start_button")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("buttons_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xwvgl")
-visible_on_start = true
-host_button = NodePath("CenterContainer/VBoxContainer/MarginContainer/VBoxContainer/HostButton")
-join_button = NodePath("CenterContainer/VBoxContainer/MarginContainer/VBoxContainer/JoinButton")
-start_button = NodePath("CenterContainer/VBoxContainer/MarginContainer/VBoxContainer/StartButton")
+script = ExtResource("1_bve8g")
+buttons_container = NodePath("CenterContainer/VBoxContainer/MarginContainer/VBoxContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -69,3 +66,7 @@ custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Start"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

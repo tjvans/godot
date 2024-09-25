@@ -1,15 +1,12 @@
 extends Node3D
 
-@onready var game_scene_root = $GameScenes
-@onready var ui_root = $UI
+@export var main_menu_scene: PackedScene
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Lobby.player_loaded.rpc(1)
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	var game_root: Node3D = $GameManager
+	var ui_root: CanvasLayer = $UI
+	Globals.game_root = game_root
+	Globals.ui_root = ui_root
+	
+	var main_menu = main_menu_scene.instantiate()
+	ui_root.add_child(main_menu)

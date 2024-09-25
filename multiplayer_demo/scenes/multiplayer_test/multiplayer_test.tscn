@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bahb4drqwmgby"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7i1n5"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_cime3"]
+sky_material = SubResource("ProceduralSkyMaterial_7i1n5")
+
+[sub_resource type="Environment" id="Environment_y7y6a"]
+background_mode = 2
+sky = SubResource("Sky_cime3")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ecnsq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txloj"]
+
+[node name="MultiplayerTest" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_y7y6a")
+camera_attributes = SubResource("CameraAttributesPractical_ecnsq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 30, 0)
+shadow_enabled = true
+
+[node name="WorldBoundaries" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+use_collision = true
+flip_faces = true
+size = Vector3(40, 40, 40)
+material = SubResource("StandardMaterial3D_txloj")
+
+[node name="Camera3D" type="Camera3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.484581, 0.874747, 0, -0.874747, 0.484581, 0, 31.5055, 18.0131)
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="SpawnPoint01" type="Marker3D" parent="Players"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="SpawnPoint02" type="Marker3D" parent="Players"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="SpawnPoint03" type="Marker3D" parent="Players"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="SpawnPoint04" type="Marker3D" parent="Players"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Entities" type="Node3D" parent="."]

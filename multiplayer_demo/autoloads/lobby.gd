@@ -2,11 +2,6 @@ extends Node
 
 # Autoload named Lobby
 
-# These signals can be connected to by a UI lobby scene or the game scene.
-signal player_connected(peer_id, player_info)
-signal player_disconnected(peer_id)
-signal server_disconnected
-
 const PORT = 7000
 const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
 const MAX_CONNECTIONS = 20
@@ -37,7 +32,7 @@ func _get_local_ip() -> String:
 	if OS.get_name() == "Linux":
 		return IP.get_local_addresses()[0]
 	else:
-		return IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
+		return IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")), IP.TYPE_IPV4)
 
 
 func join_game(address = ""):
@@ -58,7 +53,7 @@ func create_game():
 	multiplayer.multiplayer_peer = peer
 
 	players_connected[1] = player_info
-	player_connected.emit(1, player_info)
+	Signals.player_connected.emit(1, player_info)
 
 
 func remove_multiplayer_peer():
@@ -66,11 +61,14 @@ func remove_multiplayer_peer():
 
 
 # When the server decides to start the game from a UI scene,
-# do Lobby.load_game.rpc(game_root, scene_to_load)
+# do Lobby.load_game.rpc(game_root, packed_scene)
 @rpc("call_local", "reliable")
-func load_game(game_root, scene_to_load):
-	if not get_tree().get_node(game_root).has_node(scene_to_load):
-		get_tree().get_node(game_root).add_child(scene_to_load)
+func load_game(game_root: Node3D, packed_scene: PackedScene):
+	var scene: Node3D = packed_scene.instantiate()
+	if not game_root.has_node(str(scene)):
+		game_root.add_child(scene)
+	else:
+		scene.queue_free()
 
 
 # Every peer will call this when they have loaded the game scene.
@@ -93,18 +91,18 @@ func _on_player_connected(id):
 func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players_connected[new_player_id] = new_player_info
-	player_connected.emit(new_player_id, new_player_info)
+	Signals.player_connected.emit(new_player_id, new_player_info)
 
 
 func _on_player_disconnected(id):
 	players_connected.erase(id)
-	player_disconnected.emit(id)
+	Signals.player_disconnected.emit(id)
 
 
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
 	players_connected[peer_id] = player_info
-	player_connected.emit(peer_id, player_info)
+	Signals.player_connected.emit(peer_id, player_info)
 
 
 func _on_connected_fail():
@@ -114,4 +112,4 @@ func _on_connected_fail():
 func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	players_connected.clear()
-	server_disconnected.emit()
+	Signals.server_disconnected.emit()

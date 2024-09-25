@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpih8wjvm4xkg"]
+
+[ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_23lkf"]
+[ext_resource type="PackedScene" uid="uid://bahb4drqwmgby" path="res://scenes/multiplayer_test/multiplayer_test.tscn" id="2_56l0l"]
+
+[node name="GameManager" type="Node3D"]
+script = ExtResource("1_23lkf")
+scene_to_load = ExtResource("2_56l0l")
