@@ -64,11 +64,10 @@ func remove_multiplayer_peer():
 # do Lobby.load_game.rpc(game_root, packed_scene)
 @rpc("call_local", "reliable")
 func load_game(game_root: Node3D, packed_scene: PackedScene):
-	var scene: Node3D = packed_scene.instantiate()
-	if not game_root.has_node(str(scene)):
+	var packed_scene_root_node = str(packed_scene.get_state().get_node_name(0))
+	if not game_root.has_node(packed_scene_root_node):
+		var scene = packed_scene.instantiate()
 		game_root.add_child(scene)
-	else:
-		scene.queue_free()
 
 
 # Every peer will call this when they have loaded the game scene.

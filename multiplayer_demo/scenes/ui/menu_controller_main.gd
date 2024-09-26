@@ -16,4 +16,4 @@ func _on_join_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	Signals.game_start.emit()
-	self.hide()
+	#self.hide()
