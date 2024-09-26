@@ -39,18 +39,18 @@ material = SubResource("StandardMaterial3D_txloj")
 [node name="Camera3D" type="Camera3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.484581, 0.874747, 0, -0.874747, 0.484581, 0, 31.5055, 18.0131)
 
-[node name="Players" type="Node3D" parent="."]
+[node name="PlayerSpawnPoints" type="Node3D" parent="."]
 
-[node name="SpawnPoint01" type="Marker3D" parent="Players"]
+[node name="SpawnPoint01" type="Marker3D" parent="PlayerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="SpawnPoint02" type="Marker3D" parent="Players"]
+[node name="SpawnPoint02" type="Marker3D" parent="PlayerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
 
-[node name="SpawnPoint03" type="Marker3D" parent="Players"]
+[node name="SpawnPoint03" type="Marker3D" parent="PlayerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
-[node name="SpawnPoint04" type="Marker3D" parent="Players"]
+[node name="SpawnPoint04" type="Marker3D" parent="PlayerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
 [node name="Entities" type="Node3D" parent="."]

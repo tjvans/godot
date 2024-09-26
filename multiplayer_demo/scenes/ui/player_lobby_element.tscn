@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbiqswcn62cu0"]
+
+[ext_resource type="Script" path="res://scenes/ui/player_lobby_element.gd" id="1_qhub0"]
+
+[node name="PlayerLobbyElement" type="HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = -25.0
+offset_right = 110.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+script = ExtResource("1_qhub0")
+
+[node name="PlayerColour" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MultiplayerID" type="Label" parent="."]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "MultiplayerID"
+
+[node name="PlayerName" type="Label" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "Name"

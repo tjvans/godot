@@ -1,5 +1,4 @@
-extends MenuController
-class_name MenuControllerMain
+extends Control
 
 func _ready() -> void:
 	pass

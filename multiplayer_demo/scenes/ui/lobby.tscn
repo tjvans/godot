@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2g11o8oqi8qd"]
+
+[ext_resource type="Script" path="res://scenes/ui/lobby.gd" id="1_fnuw8"]
+[ext_resource type="PackedScene" uid="uid://bbiqswcn62cu0" path="res://scenes/ui/player_lobby_element.tscn" id="2_45gei"]
+
+[node name="Lobby" type="Control" node_paths=PackedStringArray("lobby_list")]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+script = ExtResource("1_fnuw8")
+lobby_element_scene = ExtResource("2_45gei")
+lobby_list = NodePath("MarginContainer/PanelContainer/MarginContainer/LobbyList")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -221.0
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MarginContainer/PanelContainer/MarginContainer"]
+_spawnable_scenes = PackedStringArray("res://scenes/ui/player_lobby_element.tscn")
+spawn_path = NodePath("../LobbyList")
+
+[node name="LobbyList" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10

@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bac1yeld7hujb"]
+[gd_scene load_steps=5 format=3 uid="uid://bac1yeld7hujb"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_sk1j5"]
 [ext_resource type="PackedScene" uid="uid://dct8eoetfhne" path="res://scenes/ui/main_menu.tscn" id="2_4qpmn"]
 [ext_resource type="PackedScene" uid="uid://cpih8wjvm4xkg" path="res://scenes/game_manager.tscn" id="2_5no16"]
+[ext_resource type="PackedScene" uid="uid://b2g11o8oqi8qd" path="res://scenes/ui/lobby.tscn" id="3_cn2xl"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_sk1j5")
 main_menu_scene = ExtResource("2_4qpmn")
+lobby_scene = ExtResource("3_cn2xl")
 
 [node name="GameManager" parent="." instance=ExtResource("2_5no16")]
 

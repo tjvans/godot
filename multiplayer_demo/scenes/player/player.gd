@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -9,7 +8,7 @@ const JUMP_VELOCITY = 4.5
 		multiplayer_id = id
 		self.name = str(id)
 var multiplayer_info
-
+var lobby_number
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
