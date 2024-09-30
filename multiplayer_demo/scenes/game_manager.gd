@@ -9,12 +9,14 @@ func _ready() -> void:
 	Lobby.player_loaded.rpc(1)
 	Signals.player_connected.connect(_add_player)
 	Signals.player_disconnected.connect(_remove_player)
-	Signals.game_start.connect(start_game)
+	Signals.load_level.connect(_load_level)
 
-
-func start_game() -> void:
+func _load_level() -> void:
 	# load_game arguments (game_root_path: String, packed_scene_root_node: String, packed_sene_resource_path: String)
 	Lobby.load_game.rpc(self.get_path(), str(scene_to_load.get_state().get_node_name(0)), scene_to_load.resource_path)
+
+func start_game() -> void:
+	print("All players are ready")
 
 # Signals
 func _add_player(id: int, player_info) -> void:
@@ -23,6 +25,7 @@ func _add_player(id: int, player_info) -> void:
 	players_in_lobby = Lobby.players_connected.duplicate()
 	players_in_lobby[id]["number"] = Lobby.players_connected.size()
 	Signals.add_player_to_lobby_ui.emit(id, players_in_lobby)
+	
 	#var player_controller: MultiPlayerController = multi_player_controller_scene.instantiate()
 	#player_controller.multiplayer_id = id
 	#table.players.add_child(player_controller, true)

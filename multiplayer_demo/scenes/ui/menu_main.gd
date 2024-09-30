@@ -10,6 +10,6 @@ func _on_join_button_pressed() -> void:
 	self.hide()
 
 
-func _on_start_button_pressed() -> void:
-	Signals.game_start.emit()
+func _on_load_button_pressed() -> void:
+	Signals.load_level.emit()
 	self.hide()

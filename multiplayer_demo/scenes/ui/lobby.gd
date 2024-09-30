@@ -7,7 +7,7 @@ var lobby_colours: Array[Color] = [Color.CRIMSON, Color.BLUE, Color.SEA_GREEN, C
 
 
 func _ready() -> void:
-	Signals.add_player_to_lobby.connect(_on_player_connected)
+	Signals.add_player_to_lobby_ui.connect(_on_player_connected)
 	Signals.player_disconnected.connect(_on_player_disconnected)
 
 # Signals

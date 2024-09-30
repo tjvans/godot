@@ -60,8 +60,7 @@ func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
 
 
-# When the server decides to start the game from a UI scene,
-# do Lobby.load_game.rpc(game_root, packed_scene)
+# When the server decides to start the game from a UI scene
 @rpc("call_local", "reliable")
 func load_game(game_root_path: String, packed_scene_root_node: String, packed_sene_resource_path: String):
 	var game_root_node = get_node(game_root_path)
