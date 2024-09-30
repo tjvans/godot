@@ -7,22 +7,23 @@ var lobby_colours: Array[Color] = [Color.CRIMSON, Color.BLUE, Color.SEA_GREEN, C
 
 
 func _ready() -> void:
-	Signals.player_connected.connect(_on_player_connected)
+	Signals.add_player_to_lobby.connect(_on_player_connected)
 	Signals.player_disconnected.connect(_on_player_disconnected)
 
 # Signals
-func _on_player_connected(id: int, player_info) -> void:
+func _on_player_connected(id: int, players_connected) -> void:
 	if not multiplayer.is_server():
 		return
 	if lobby_list.has_node(str(id)):
 		return
 	var player_lobby_element = lobby_element_scene.instantiate()
-	player_lobby_element.name = str(id)
-	var player_colour = player_info["number"] - 1
-	player_lobby_element.player_colour = lobby_colours[player_colour]
-	player_lobby_element.multiplayer_id = id
-	player_lobby_element.player_name = player_info["name"]
-	lobby_list.add_child(player_lobby_element)
+	if id in players_connected:
+		player_lobby_element.name = str(id)
+		var player_colour = players_connected[id]["number"] - 1
+		player_lobby_element.player_colour = lobby_colours[player_colour]
+		player_lobby_element.multiplayer_id = id
+		player_lobby_element.player_name = players_connected[id]["name"]
+		lobby_list.add_child(player_lobby_element)
 
 func _on_player_disconnected(id: int) -> void:
 	lobby_list.get_node(str(id)).queue_free()

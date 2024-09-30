@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bahb4drqwmgby"]
+[gd_scene load_steps=7 format=3 uid="uid://bahb4drqwmgby"]
+
+[ext_resource type="Script" path="res://scenes/multiplayer_test/multiplayer_test.gd" id="1_5q4jj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7i1n5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,6 +20,7 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txloj"]
 
 [node name="MultiplayerTest" type="Node3D"]
+script = ExtResource("1_5q4jj")
 
 [node name="Environment" type="Node3D" parent="."]
 

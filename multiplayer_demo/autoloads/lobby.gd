@@ -63,11 +63,12 @@ func remove_multiplayer_peer():
 # When the server decides to start the game from a UI scene,
 # do Lobby.load_game.rpc(game_root, packed_scene)
 @rpc("call_local", "reliable")
-func load_game(game_root_node: Node3D, packed_scene: PackedScene):
-	var packed_scene_root_node = str(packed_scene.get_state().get_node_name(0))
+func load_game(game_root_path: String, packed_scene_root_node: String, packed_sene_resource_path: String):
+	var game_root_node = get_node(game_root_path)
 	if game_root_node.has_node(packed_scene_root_node):
 		push_error("Level already loaded.")
 		return
+	var packed_scene = load(packed_sene_resource_path)
 	var scene = packed_scene.instantiate()
 	game_root_node.add_child(scene)
 

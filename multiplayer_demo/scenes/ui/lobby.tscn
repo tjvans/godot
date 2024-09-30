@@ -38,6 +38,7 @@ theme_override_constants/margin_bottom = 20
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MarginContainer/PanelContainer/MarginContainer"]
 _spawnable_scenes = PackedStringArray("res://scenes/ui/player_lobby_element.tscn")
 spawn_path = NodePath("../LobbyList")
+spawn_limit = 4
 
 [node name="LobbyList" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2

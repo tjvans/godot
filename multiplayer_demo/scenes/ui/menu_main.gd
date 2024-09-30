@@ -1,8 +1,5 @@
 extends Control
 
-func _ready() -> void:
-	pass
-
 # signals
 func _on_host_button_pressed() -> void:
 	Lobby.create_game()
@@ -15,4 +12,4 @@ func _on_join_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	Signals.game_start.emit()
-	#self.hide()
+	self.hide()
