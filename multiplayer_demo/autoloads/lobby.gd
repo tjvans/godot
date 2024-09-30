@@ -77,8 +77,9 @@ func load_game(game_root_path: String, packed_scene_root_node: String, packed_se
 func player_loaded(game_root_node):
 	if multiplayer.is_server():
 		players_loaded += 1
+		print(players_loaded)
 		if players_loaded == players_connected.size():
-			game_root_node.start_game()
+			get_node(game_root_node).start_game()
 			players_loaded = 0
 
 

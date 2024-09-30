@@ -3,7 +3,7 @@ extends Control
 # signals
 func _on_host_button_pressed() -> void:
 	Lobby.create_game()
-
+	%JoinButton.disabled = true
 
 func _on_join_button_pressed() -> void:
 	Lobby.join_game()

@@ -1,6 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bibdv4suu036v"]
+[gd_scene load_steps=5 format=3 uid="uid://bibdv4suu036v"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_xiwiy"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fu73g"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hxexo"]
 
@@ -8,6 +16,9 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_xiwiy")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_fu73g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_hxexo")
