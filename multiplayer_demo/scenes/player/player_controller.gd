@@ -8,7 +8,7 @@ const JUMP_VELOCITY = 4.5
 		multiplayer_id = id
 		self.name = str(id)
 		%InputSynchronizer.set_multiplayer_authority(id)
-var multiplayer_info
+@export var multiplayer_info: Dictionary
 
 func _ready() -> void:
 	if multiplayer.get_unique_id() == multiplayer_id:

@@ -11,6 +11,7 @@ func _ready() -> void:
 	Signals.player_connected.connect(_add_player)
 	Signals.player_disconnected.connect(_remove_player)
 	Signals.load_level.connect(_load_level)
+	Globals.players_spawn = $Players
 
 func _load_level() -> void:
 	# load_game arguments (game_root_path: String, packed_scene_root_node: String, packed_sene_resource_path: String)
@@ -31,7 +32,6 @@ func _add_player(id: int, player_info) -> void:
 func _spawn_players() -> void:
 	var players_to_spawn = players_in_lobby.keys()
 	for player in players_to_spawn:
-		print(player)
 		var new_player_scene = player_scene.instantiate()
 		new_player_scene.multiplayer_id = player
 		new_player_scene.multiplayer_info = players_in_lobby[player]
