@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bibdv4suu036v"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_xiwiy"]
+[ext_resource type="Script" path="res://scenes/player/player_orb.gd" id="1_7p2g3"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fu73g"]
 properties/0/path = NodePath(".:position")
@@ -15,7 +15,7 @@ properties/1/replication_mode = 1
 [sub_resource type="SphereMesh" id="SphereMesh_e78g2"]
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_xiwiy")
+script = ExtResource("1_7p2g3")
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_fu73g")

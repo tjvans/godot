@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2g11o8oqi8qd"]
 
-[ext_resource type="Script" path="res://scenes/ui/lobby.gd" id="1_fnuw8"]
-[ext_resource type="PackedScene" uid="uid://bbiqswcn62cu0" path="res://scenes/ui/player_lobby_element.tscn" id="2_45gei"]
+[ext_resource type="Script" path="res://scenes/ui/lobby_ui.gd" id="1_8v4ok"]
+[ext_resource type="PackedScene" uid="uid://bbiqswcn62cu0" path="res://scenes/ui/player_lobby_element.tscn" id="2_pcx1p"]
 
-[node name="Lobby" type="Control" node_paths=PackedStringArray("lobby_list")]
+[node name="LobbyUI" type="Control" node_paths=PackedStringArray("lobby_list")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
-script = ExtResource("1_fnuw8")
-lobby_element_scene = ExtResource("2_45gei")
+script = ExtResource("1_8v4ok")
+lobby_element_scene = ExtResource("2_pcx1p")
 lobby_list = NodePath("MarginContainer/PanelContainer/MarginContainer/LobbyList")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

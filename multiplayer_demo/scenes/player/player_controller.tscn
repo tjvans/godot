@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1vtrbkws6l5k"]
+
+[ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_yp23l"]
+[ext_resource type="PackedScene" uid="uid://bibdv4suu036v" path="res://scenes/player/player_orb.tscn" id="2_bekow"]
+[ext_resource type="Script" path="res://scenes/player/input_synchronizer.gd" id="2_ja7a3"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0gmsq"]
+properties/0/path = NodePath(".:multiplayer_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yoegl"]
+properties/0/path = NodePath("InputSynchronizer:input_direction")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PlayerController" type="Node3D"]
+script = ExtResource("1_yp23l")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0gmsq")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_yoegl")
+script = ExtResource("2_ja7a3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.983898, 0.178734, 0, -0.178734, 0.983898, 0, 0.819886, 1.79911)
+
+[node name="PlayerOrb" parent="." instance=ExtResource("2_bekow")]

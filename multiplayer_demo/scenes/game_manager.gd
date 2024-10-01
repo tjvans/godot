@@ -1,4 +1,5 @@
 extends Node3D
+class_name GameManager
 
 @export var scene_to_load: PackedScene
 @export var player_scene: PackedScene
@@ -16,7 +17,8 @@ func _load_level() -> void:
 	Lobby.load_game.rpc(self.get_path(), str(scene_to_load.get_state().get_node_name(0)), scene_to_load.resource_path)
 
 func start_game() -> void:
-	print("All players are ready")
+	print("All players have loaded the level")
+	_spawn_players()
 
 # Signals
 func _add_player(id: int, player_info) -> void:
@@ -25,21 +27,21 @@ func _add_player(id: int, player_info) -> void:
 	players_in_lobby = Lobby.players_connected.duplicate()
 	players_in_lobby[id]["number"] = Lobby.players_connected.size()
 	Signals.add_player_to_lobby_ui.emit(id, players_in_lobby)
+
+func _spawn_players() -> void:
+	var players_to_spawn = players_in_lobby.keys()
+	for player in players_to_spawn:
+		print(player)
+		var new_player_scene = player_scene.instantiate()
+		new_player_scene.multiplayer_id = player
+		new_player_scene.multiplayer_info = players_in_lobby[player]
+		$Players.add_child(new_player_scene, true)
+
+func _remove_player(id: int) -> void:
+	if players_in_lobby.has(id):
+		players_in_lobby.erase(id)
+		print(players_in_lobby)
+	if not $Players.has_node(str(id)):
+		return
+	$Players.get_node(str(id)).queue_free()
 	
-	#var player_controller: MultiPlayerController = multi_player_controller_scene.instantiate()
-	#player_controller.multiplayer_id = id
-	#table.players.add_child(player_controller, true)
-	#
-	#var player_data = PlayerData.new()
-	#player_data.multiplayer_id = id
-	#player_data.name = multiplayer_info.name
-	#player_data.seat_number = MultiplayerGlobals.connected_players.size()
-	#player_controller.player.setup(player_data, table)
-	#
-	#player_controller.player.turn_done.connect(_start_next_turn)
-	#player_controllers.append(player_controller)
-	#players.append(player_controller.player)
-
-
-func _remove_player() -> void:
-	pass
