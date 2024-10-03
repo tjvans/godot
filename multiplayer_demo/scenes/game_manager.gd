@@ -4,6 +4,7 @@ class_name GameManager
 @export var scene_to_load: PackedScene
 @export var player_scene: PackedScene
 var players_in_lobby: Dictionary
+var lobby_colours: Array[Color] = [Color.CRIMSON, Color.BLUE, Color.SEA_GREEN, Color.YELLOW]
 
 
 func _ready() -> void:
@@ -27,11 +28,13 @@ func _add_player(id: int, player_info) -> void:
 		return
 	players_in_lobby = Lobby.players_connected.duplicate()
 	players_in_lobby[id]["number"] = Lobby.players_connected.size()
+	players_in_lobby[id]["colour"] = lobby_colours[Lobby.players_connected.size() - 1]
 	Signals.add_player_to_lobby_ui.emit(id, players_in_lobby)
 
 func _spawn_players() -> void:
 	var players_to_spawn = players_in_lobby.keys()
 	for player in players_to_spawn:
+		print(player)
 		var new_player_scene = player_scene.instantiate()
 		new_player_scene.multiplayer_id = player
 		new_player_scene.multiplayer_info = players_in_lobby[player]

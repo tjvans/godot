@@ -3,8 +3,6 @@ extends Control
 @export var lobby_element_scene: PackedScene
 @export var lobby_list: VBoxContainer
 
-var lobby_colours: Array[Color] = [Color.CRIMSON, Color.BLUE, Color.SEA_GREEN, Color.YELLOW]
-
 
 func _ready() -> void:
 	Signals.add_player_to_lobby_ui.connect(_on_player_connected)
@@ -18,11 +16,10 @@ func _on_player_connected(id: int, players_connected) -> void:
 		return
 	var player_lobby_element = lobby_element_scene.instantiate()
 	if id in players_connected:
-		player_lobby_element.name = str(id)
-		var player_colour = players_connected[id]["number"] - 1
-		player_lobby_element.player_colour = lobby_colours[player_colour]
 		player_lobby_element.multiplayer_id = id
+		player_lobby_element.name = str(id)
 		player_lobby_element.player_name = players_connected[id]["name"]
+		player_lobby_element.player_colour = players_connected[id]["colour"]
 		lobby_list.add_child(player_lobby_element)
 
 func _on_player_disconnected(id: int) -> void:

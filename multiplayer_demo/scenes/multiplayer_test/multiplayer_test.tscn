@@ -43,18 +43,18 @@ material = SubResource("StandardMaterial3D_txloj")
 transform = Transform3D(1, 0, 0, 0, 0.484581, 0.874747, 0, -0.874747, 0.484581, 0, 31.5055, 18.0131)
 
 [node name="PlayerSpawnPoints" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="SpawnPoint01" type="Marker3D" parent="PlayerSpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="SpawnPoint02" type="Marker3D" parent="PlayerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 0)
 
 [node name="SpawnPoint03" type="Marker3D" parent="PlayerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -10)
 
 [node name="SpawnPoint04" type="Marker3D" parent="PlayerSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 0)
 
 [node name="Entities" type="Node3D" parent="."]
