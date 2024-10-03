@@ -4,8 +4,6 @@ extends CharacterBody3D
 @export var acceleration = 4.0
 @export var jump_speed = 8.0
 
-func _ready() -> void:
-	pass
 
 func _apply_movement(delta: float) -> void:
 	# Add the gravity.

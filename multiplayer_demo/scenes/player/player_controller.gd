@@ -8,7 +8,6 @@ extends Node3D
 		%InputSynchronizer.set_multiplayer_authority(id)
 @export var multiplayer_info: Dictionary
 
-@onready var player_orb: CharacterBody3D = $PlayerOrb
 
 func _ready() -> void:
 	if multiplayer.get_unique_id() == multiplayer_id:
