@@ -28,8 +28,6 @@ func _spawn_players() -> void:
 
 # Signals
 func _add_player(id: int, player_info) -> void:
-	if not multiplayer.is_server():
-		return
 	players_in_lobby = Lobby.players_connected.duplicate()
 	players_in_lobby[id]["number"] = Lobby.players_connected.size()
 	players_in_lobby[id]["colour"] = player_colours[Lobby.players_connected.size() - 1]
