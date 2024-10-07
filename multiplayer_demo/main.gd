@@ -1,11 +1,13 @@
 extends Node3D
 
+
 @export var main_menu_scene: PackedScene
 @export var lobby_scene: PackedScene
+@onready var game_root: Node3D = $GameManager
+@onready var ui_root: CanvasLayer = $UI 
+
 
 func _ready() -> void:
-	var game_root: Node3D = $GameManager
-	var ui_root: CanvasLayer = $UI
 	Globals.game_root = game_root
 	Globals.ui_root = ui_root
 	

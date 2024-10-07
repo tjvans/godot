@@ -18,6 +18,7 @@ var player_info = {"name": "Name"}
 
 var local_ip = _get_local_ip()
 
+var loaded_ids: Array = []
 var players_loaded = 0
 
 
@@ -71,17 +72,16 @@ func load_game(game_root_path: String, packed_scene_root_node: String, packed_se
 	var scene = packed_scene.instantiate()
 	game_root_node.add_child(scene)
 
-
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
 func player_loaded(game_root_node):
+	var sender_id: int = multiplayer.get_remote_sender_id()
+	if not loaded_ids.has(sender_id):
+		loaded_ids.append(sender_id)
 	if multiplayer.is_server():
-		players_loaded += 1
-		print(players_loaded)
+		players_loaded = loaded_ids.size()
 		if players_loaded == players_connected.size():
 			get_node(game_root_node).start_game()
-			players_loaded = 0
-
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.

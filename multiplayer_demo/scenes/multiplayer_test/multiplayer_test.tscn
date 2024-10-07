@@ -22,6 +22,11 @@ glow_enabled = true
 [node name="MultiplayerTest" type="Node3D"]
 script = ExtResource("1_5q4jj")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player/player_controller.tscn")
+spawn_path = NodePath("../PlayerSpawnPoints")
+spawn_limit = 4
+
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
