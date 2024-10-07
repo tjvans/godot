@@ -17,7 +17,7 @@ func _unhandled_input(event):
 		spring_arm.rotation_degrees.x = clamp(spring_arm.rotation_degrees.x, -90.0, 30.0)
 		spring_arm.rotation.y -= event.relative.x * mouse_sensitivity
 	if Input.is_action_just_pressed("ui_accept"):
-		if $"..".multiplayer_id == multiplayer.get_unique_id():
+		if get_multiplayer_authority() == multiplayer.get_unique_id():
 			jump.rpc()
 
 func _physics_process(delta: float) -> void:

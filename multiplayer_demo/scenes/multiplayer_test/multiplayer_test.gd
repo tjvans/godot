@@ -7,11 +7,12 @@ func _ready() -> void:
 	Lobby.player_loaded.rpc(Globals.game_root.get_path())
 
 func _process(delta: float) -> void:
-	if Lobby.players_loaded == 4 and players_moved == false:
+	if multiplayer.is_server() and Lobby.players_loaded == 4 and players_moved == false:
+		position_players()
 		position_players.rpc()
 		players_moved = true
 
-@rpc("call_local", "reliable")
+@rpc("authority", "reliable")
 func position_players() -> void:
 	var player_nodes = Globals.players_spawn.get_children()
 	if player_nodes.size() == Lobby.players_connected.size():
