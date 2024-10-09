@@ -1,7 +1,7 @@
 extends Node3D
 
 
-@onready var player_orb: CharacterBody3D = $PlayerOrb
+@onready var orb: CharacterBody3D = $PlayerOrb
 @export var multiplayer_id: int = 1:
 	set(id):
 		multiplayer_id = id

@@ -20,7 +20,7 @@ func _on_player_connected(id: int, players_connected) -> void:
 		player_lobby_element.multiplayer_id = id
 		player_lobby_element.name = str(id)
 		player_lobby_element.player_name = players_connected[id]["name"]
-		player_lobby_element.player_colour = players_connected[id]["colour"]
+		player_lobby_element.player_color = players_connected[id]["color"]
 		lobby_list.add_child(player_lobby_element)
 
 func _on_player_disconnected(id: int) -> void:

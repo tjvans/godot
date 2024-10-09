@@ -7,7 +7,8 @@ func _ready() -> void:
 	Lobby.player_loaded.rpc(Globals.game_root.get_path())
 
 func _process(delta: float) -> void:
-	if multiplayer.is_server() and Lobby.players_loaded == 4 and players_moved == false:
+	if Lobby.players_loaded == Lobby.players_connected.size()\
+	 and players_moved == false:
 		position_players()
 		position_players.rpc()
 		players_moved = true
@@ -16,13 +17,14 @@ func _process(delta: float) -> void:
 func position_players() -> void:
 	var player_nodes = Globals.players_spawn.get_children()
 	if player_nodes.size() == Lobby.players_connected.size():
-		var spawn_points = $PlayerSpawnPoints.get_children()
+		var spawn_points = $PlayerStartPositions.get_children()
 		for player in player_nodes:
-			player.player_orb.set_physics_process(false)
-			player.player_orb.velocity = Vector3.ZERO
+			player.orb.set_process_mode(false)
+			player.orb.set_physics_process(false)
+			player.orb.velocity = Vector3.ZERO
 			player.global_transform = spawn_points[player.get_index()].global_transform
-			player.player_orb.set_process_mode(true)
 			await get_tree().physics_frame
-			player.player_orb.set_physics_process(true)
+			player.orb.set_process_mode(true)
+			player.orb.set_physics_process(true)
 	else:
-		push_error("Player Nodes Not Found")
+		push_error("Player nodes not found")

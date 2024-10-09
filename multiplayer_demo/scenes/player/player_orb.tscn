@@ -1,16 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bibdv4suu036v"]
+[gd_scene load_steps=6 format=3 uid="uid://bibdv4suu036v"]
 
 [ext_resource type="Script" path="res://scenes/player/player_orb.gd" id="1_7p2g3"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a8855"]
+properties/0/path = NodePath(".:mesh_color")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_hxexo"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_e78g2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wquiu"]
+resource_local_to_scene = true
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_tns6x"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_wquiu")
+
+[node name="PlayerOrb" type="CharacterBody3D"]
 script = ExtResource("1_7p2g3")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_a8855")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_hxexo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_e78g2")
+mesh = SubResource("SphereMesh_tns6x")

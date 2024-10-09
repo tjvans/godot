@@ -62,11 +62,11 @@ func remove_multiplayer_peer():
 
 
 # When the server decides to start the game from a UI scene
-@rpc("call_local", "reliable")
+@rpc("authority", "reliable")
 func load_game(game_root_path: String, packed_scene_root_node: String, packed_sene_resource_path: String):
 	var game_root_node = get_node(game_root_path)
 	if game_root_node.has_node(packed_scene_root_node):
-		push_error("Level already loaded.")
+		push_error("Level already loaded")
 		return
 	var packed_scene = load(packed_sene_resource_path)
 	var scene = packed_scene.instantiate()
@@ -75,13 +75,13 @@ func load_game(game_root_path: String, packed_scene_root_node: String, packed_se
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
 func player_loaded(game_root_node):
-	var sender_id: int = multiplayer.get_remote_sender_id()
-	if not loaded_ids.has(sender_id):
-		loaded_ids.append(sender_id)
 	if multiplayer.is_server():
-		players_loaded = loaded_ids.size()
-		if players_loaded == players_connected.size():
-			get_node(game_root_node).start_game()
+		var sender_id: int = multiplayer.get_remote_sender_id()
+		if not loaded_ids.has(sender_id):
+			loaded_ids.append(sender_id)
+			players_loaded = loaded_ids.size()
+			if players_loaded == players_connected.size():
+				get_node(game_root_node).start_game()
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.

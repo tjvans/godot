@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bahb4drqwmgby"]
 
-[ext_resource type="Script" path="res://scenes/multiplayer_test/multiplayer_test.gd" id="1_5q4jj"]
+[ext_resource type="Script" path="res://scenes/levels/multiplayer_test.gd" id="1_5q4jj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7i1n5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,11 +22,6 @@ glow_enabled = true
 [node name="MultiplayerTest" type="Node3D"]
 script = ExtResource("1_5q4jj")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/player/player_controller.tscn")
-spawn_path = NodePath("../PlayerSpawnPoints")
-spawn_limit = 4
-
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
@@ -47,19 +42,19 @@ material = SubResource("StandardMaterial3D_txloj")
 [node name="Camera3D" type="Camera3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.484581, 0.874747, 0, -0.874747, 0.484581, 0, 31.5055, 18.0131)
 
-[node name="PlayerSpawnPoints" type="Node3D" parent="."]
+[node name="PlayerStartPositions" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
-[node name="SpawnPoint01" type="Marker3D" parent="PlayerSpawnPoints"]
+[node name="Point01" type="Marker3D" parent="PlayerStartPositions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="SpawnPoint02" type="Marker3D" parent="PlayerSpawnPoints"]
+[node name="Point02" type="Marker3D" parent="PlayerStartPositions"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 0)
 
-[node name="SpawnPoint03" type="Marker3D" parent="PlayerSpawnPoints"]
+[node name="Point03" type="Marker3D" parent="PlayerStartPositions"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -10)
 
-[node name="SpawnPoint04" type="Marker3D" parent="PlayerSpawnPoints"]
+[node name="Point04" type="Marker3D" parent="PlayerStartPositions"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 0)
 
 [node name="Entities" type="Node3D" parent="."]

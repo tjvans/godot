@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpih8wjvm4xkg"]
 
 [ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_23lkf"]
-[ext_resource type="PackedScene" uid="uid://bahb4drqwmgby" path="res://scenes/multiplayer_test/multiplayer_test.tscn" id="2_56l0l"]
+[ext_resource type="PackedScene" uid="uid://bahb4drqwmgby" path="res://scenes/levels/multiplayer_test.tscn" id="2_56l0l"]
 [ext_resource type="PackedScene" uid="uid://d1vtrbkws6l5k" path="res://scenes/player/player_controller.tscn" id="3_m7yti"]
 
 [node name="GameManager" type="Node3D"]
@@ -9,7 +9,7 @@ script = ExtResource("1_23lkf")
 scene_to_load = ExtResource("2_56l0l")
 player_scene = ExtResource("3_m7yti")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/player_controller.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 4

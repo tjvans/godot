@@ -1,6 +1,10 @@
 extends CharacterBody3D
 
 
+@export var mesh_color: Color = Color.WHITE:
+	set(color):
+		mesh_color = color
+		$MeshInstance3D.mesh.material.albedo_color = color
 @export var speed = 5.0
 @export var acceleration = 4.0
 @export var jump_speed = 8.0

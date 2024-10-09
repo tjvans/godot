@@ -1,9 +1,9 @@
 extends HBoxContainer
 
-@export var player_colour: Color:
-	set(colour):
-		player_colour = colour
-		$PlayerColour.color = colour
+@export var player_color: Color:
+	set(color):
+		player_color = color
+		$PlayerColor.color = color
 @export var multiplayer_id: int:
 	set(id):
 		multiplayer_id = id

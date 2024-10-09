@@ -3,12 +3,13 @@ class_name GameManager
 
 @export var scene_to_load: PackedScene
 @export var player_scene: PackedScene
+
+const PLAYER_COLORS: Array[Color] = [Color.CRIMSON, Color.BLUE, Color.SEA_GREEN, Color.YELLOW]
+
 var players_in_lobby: Dictionary
-var player_colours: Array[Color] = [Color.CRIMSON, Color.BLUE, Color.SEA_GREEN, Color.YELLOW]
 
 
 func _ready() -> void:
-	Lobby.player_loaded.rpc(1)
 	Signals.player_connected.connect(_add_player)
 	Signals.player_disconnected.connect(_remove_player)
 	Signals.load_level.connect(_load_level)
@@ -25,22 +26,25 @@ func _spawn_players() -> void:
 		new_player_scene.multiplayer_id = player
 		new_player_scene.multiplayer_info = players_in_lobby[player]
 		$Players.add_child(new_player_scene, true)
+		new_player_scene.orb.mesh_color = players_in_lobby[player]["color"]
 
 # Signals
 func _add_player(id: int, player_info) -> void:
 	players_in_lobby = Lobby.players_connected.duplicate()
 	players_in_lobby[id]["number"] = Lobby.players_connected.size()
-	players_in_lobby[id]["colour"] = player_colours[Lobby.players_connected.size() - 1]
+	players_in_lobby[id]["color"] = PLAYER_COLORS[Lobby.players_connected.size() - 1]
 	Signals.add_player_to_lobby_ui.emit(id, players_in_lobby)
 
 func _remove_player(id: int) -> void:
 	if players_in_lobby.has(id):
 		players_in_lobby.erase(id)
-		print(players_in_lobby)
+		print("Remaining connected players: ", players_in_lobby)
 	if not $Players.has_node(str(id)):
+		push_error("Player scene with id: ", id, " not found")
 		return
 	$Players.get_node(str(id)).queue_free()
 
 func _load_level() -> void:
 	# load_game arguments (game_root_path: String, packed_scene_root_node: String, packed_sene_resource_path: String)
+	Lobby.load_game(self.get_path(), str(scene_to_load.get_state().get_node_name(0)), scene_to_load.resource_path)
 	Lobby.load_game.rpc(self.get_path(), str(scene_to_load.get_state().get_node_name(0)), scene_to_load.resource_path)
