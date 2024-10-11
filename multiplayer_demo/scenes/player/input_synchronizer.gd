@@ -17,12 +17,16 @@ func _unhandled_input(event):
 		spring_arm.rotation_degrees.x = clamp(spring_arm.rotation_degrees.x, -90.0, 30.0)
 		spring_arm.rotation.y -= event.relative.x * mouse_sensitivity
 	if Input.is_action_just_pressed("ui_accept"):
-		if get_multiplayer_authority() == multiplayer.get_unique_id():
+		if get_multiplayer_authority() == 1:
+			jump()
+		if get_multiplayer_authority() == multiplayer.get_unique_id()\
+		 and not multiplayer.is_server():
 			jump.rpc()
 
 func _physics_process(delta: float) -> void:
 	input_direction = align_input_to_player_orientation()
-	camera_direction = Vector3(input_direction.x, 0, input_direction.y).rotated(Vector3.UP, spring_arm.rotation.y)
+	camera_direction = Vector3(input_direction.x, 0, input_direction.y)\
+	.rotated(Vector3.UP, spring_arm.rotation.y)
 
 func align_input_to_player_orientation() -> Vector2:
 	var input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -31,7 +35,6 @@ func align_input_to_player_orientation() -> Vector2:
 	var rotated_input = player_basis * input_vector3d
 	return Vector2(rotated_input.x, rotated_input.z)
 
-@rpc("call_local")
+@rpc("authority")
 func jump():
-	if multiplayer.is_server():
-		$"../PlayerOrb".do_jump = true
+	$"../PlayerOrb".do_jump = true

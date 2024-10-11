@@ -1,7 +1,7 @@
 extends Node3D
 class_name GameManager
 
-@export var scene_to_load: PackedScene
+@export var level_to_load: PackedScene
 @export var player_scene: PackedScene
 
 const PLAYER_COLORS: Array[Color] = [Color.CRIMSON, Color.BLUE, Color.SEA_GREEN, Color.YELLOW]
@@ -46,5 +46,5 @@ func _remove_player(id: int) -> void:
 
 func _load_level() -> void:
 	# load_game arguments (game_root_path: String, packed_scene_root_node: String, packed_sene_resource_path: String)
-	Lobby.load_game(self.get_path(), str(scene_to_load.get_state().get_node_name(0)), scene_to_load.resource_path)
-	Lobby.load_game.rpc(self.get_path(), str(scene_to_load.get_state().get_node_name(0)), scene_to_load.resource_path)
+	Lobby.load_game(self.get_path(), str(level_to_load.get_state().get_node_name(0)), level_to_load.resource_path)
+	Lobby.load_game.rpc(self.get_path(), str(level_to_load.get_state().get_node_name(0)), level_to_load.resource_path)
