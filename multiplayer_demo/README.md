@@ -33,7 +33,7 @@ root
 
 The following notable changes were made:
 - `_get_local_ip`: Returns the computer's current IP, depending on the platform. Useful for quick hosting and testing.
-- `load_game`: This method has been changed to add scenes to the current scene tree, instead of replacing the whole scene tree. The arguments passed to this function in the `GameManager` script are all strings in order to limit the amount of data passed by the remote procedure call.
+- `load_game`: This method has been changed to add scenes to the current scene tree, instead of replacing the whole scene tree. The arguments passed to this function in the `GameManager` script are all strings in order to limit the amount of data passed by the remote procedure call.\
   The `game_root_path` is used to select the node that will become the parent of the added level scene, namely `GameManager`.\
   The `packed_scene_root_node` is used to check whether the scene has already been loaded without having to instantiate the packed scene. This is achieved by getting the name of the root node from the packed scene resource with `str(scene_to_load.get_state().get_node_name(0))`.\
   Finally, the `packed_scene_resource_path` is used to load the resource.
